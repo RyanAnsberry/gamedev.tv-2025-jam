@@ -1,11 +1,17 @@
-[gd_scene load_steps=45 format=3 uid="uid://csnu5oe1jw6ks"]
+[gd_scene load_steps=48 format=3 uid="uid://csnu5oe1jw6ks"]
 
 [ext_resource type="Script" uid="uid://donbbsbhu5u0y" path="res://Scripts/Player/player.gd" id="1_a3d8c"]
 [ext_resource type="Texture2D" uid="uid://bf2cpqvg076eq" path="res://Assets/Anokolisa/Legacy Action Pack - STARSHIP/Character/Sheets/Full-Sheet-Green.png" id="1_uvnfx"]
+[ext_resource type="Texture2D" uid="uid://byynmsf67ep5o" path="res://Assets/Custom/Custom-Sheet-Green.png" id="2_mtuoh"]
+[ext_resource type="Script" uid="uid://du2p1s5m7nt6x" path="res://Scripts/Player/aim_node.gd" id="3_xpcdj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a3d8c"]
 radius = 7.0
 height = 40.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5u0x"]
+atlas = ExtResource("2_mtuoh")
+region = Rect2(2876, 0, 72, 72)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xpcdj"]
 atlas = ExtResource("1_uvnfx")
@@ -171,6 +177,14 @@ region = Rect2(656, 0, 72, 72)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_h5u0x")
+}],
+"loop": true,
+"name": &"aim_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xpcdj")
 }],
 "loop": true,
@@ -334,5 +348,40 @@ shape = SubResource("CapsuleShape2D_a3d8c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_h5u0x")
-animation = &"idle"
+animation = &"aim_down"
 autoplay = "idle"
+flip_h = true
+
+[node name="AimNode" type="Node2D" parent="."]
+script = ExtResource("3_xpcdj")
+
+[node name="RightPosition" type="Marker2D" parent="AimNode"]
+position = Vector2(16, 0)
+
+[node name="RightDownPosition" type="Marker2D" parent="AimNode"]
+position = Vector2(16, 12)
+rotation = 0.479966
+
+[node name="LeftDownPosition" type="Marker2D" parent="AimNode"]
+position = Vector2(-16, 12)
+rotation = 2.67908
+
+[node name="UpPosition" type="Marker2D" parent="AimNode"]
+position = Vector2(0, -19)
+rotation = -1.5708
+
+[node name="DownPosition" type="Marker2D" parent="AimNode"]
+position = Vector2(0, 19)
+rotation = 1.5708
+
+[node name="LeftPosition" type="Marker2D" parent="AimNode"]
+position = Vector2(-16, 0)
+rotation = 3.14159
+
+[node name="RightUpPosition" type="Marker2D" parent="AimNode"]
+position = Vector2(14, -12)
+rotation = -0.479966
+
+[node name="LeftUpPosition" type="Marker2D" parent="AimNode"]
+position = Vector2(-14, -12)
+rotation = -2.67908
